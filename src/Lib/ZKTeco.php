@@ -331,9 +331,9 @@ class ZKTeco{
    *
    * @return array [uid, id, state, timestamp]
    */
-  public function getAttendance()
+  public function getAttendance(int $recordLength = 40)
   {
-    return Attendance::get($this);
+    return Attendance::get($this, $recordLength);
   }
 
   /**
