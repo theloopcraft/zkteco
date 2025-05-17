@@ -10,7 +10,7 @@ class Attendance
      * @param ZKTeco $self
      * @return array [uid, id, state, timestamp]
      */
-    static public function get(ZKTeco $self)
+    static public function get(ZKTeco $self, int $recordLength = 40)
     {
         $self->_section = __METHOD__;
 
@@ -28,8 +28,8 @@ class Attendance
         if (!empty($attData)) {
             $attData = substr($attData, 10);
 
-            while (strlen($attData) > 40) {
-                $u = unpack('H78', substr($attData, 0, 39));
+            while (strlen($attData) > $recordLength ) {
+                $u = unpack('H78', substr($attData, 0, $recordLength - 1));
 
                 $u1 = hexdec(substr($u[1], 4, 2));
                 $u2 = hexdec(substr($u[1], 6, 2));
